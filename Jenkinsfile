@@ -12,7 +12,17 @@ pipeline {
                 }
             }
         }
-        stage('Test') {
+        stage('Test01') {
+            steps {
+                sh 'mvn -f hello-app/pom.xml test'
+            }
+            post {
+                always {
+                    junit 'hello-app/target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage('Test02') {
             steps {
                 sh 'mvn -f hello-app/pom.xml test'
             }
